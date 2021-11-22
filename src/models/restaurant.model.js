@@ -10,7 +10,7 @@ const restaurantSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
-    descriprion: {
+    description: {
         type: String,
         required: true,
         trim: true,
@@ -39,10 +39,9 @@ const restaurantSchema = mongoose.Schema(
         default: 0,
     },
     location: {
-        type: String,
-        required: true,
-        trim: true,
-    },
+      type: { type: String },
+      coordinates: [Number],
+  }
   },
   {
     timestamps: true,
@@ -52,6 +51,7 @@ const restaurantSchema = mongoose.Schema(
 // add plugin that converts mongoose to json
 restaurantSchema.plugin(toJSON);
 restaurantSchema.plugin(paginate);
+restaurantSchema.index({location: "2dsphere"});
 
 /**
  * Check if name is taken

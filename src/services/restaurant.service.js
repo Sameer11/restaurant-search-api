@@ -11,6 +11,10 @@ const createRestaurant = async (restaurantBody) => {
   if (await Restaurant.isNameTaken(restaurantBody.name)) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Restaurant name already exist');
   }
+  restaurantBody.location = {
+    type: "Point",
+    coordinates: restaurantBody.location
+  }
   return Restaurant.create(restaurantBody);
 };
 

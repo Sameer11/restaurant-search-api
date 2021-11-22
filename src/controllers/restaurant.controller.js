@@ -5,32 +5,32 @@ const catchAsync = require('../utils/catchAsync');
 const { restaurantService } = require('../services');
 
 const createRestaurant = catchAsync(async (req, res) => {
-  const user = await userService.createUser(req.body);
-  res.status(httpStatus.CREATED).send(user);
+  const restaurant = await restaurantService.createRestaurant(req.body);
+  res.status(httpStatus.CREATED).send(restaurant);
 });
 
 const getRestaurants = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['name', 'role']);
+  const filter = pick(req.query, ['name']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
-  const result = await userService.queryUsers(filter, options);
+  const result = await restaurantService.queryRestaurants(filter, options);
   res.send(result);
 });
 
 const getRestaurant = catchAsync(async (req, res) => {
-  const user = await userService.getUserById(req.params.userId);
-  if (!user) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  const restaurant = await restaurantService.getRestaurantById(req.params.restaurantId);
+  if (!restaurant) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Restaurant not found');
   }
-  res.send(user);
+  res.send(restaurant);
 });
 
 const updateRestaurant = catchAsync(async (req, res) => {
-  const user = await userService.updateUserById(req.params.userId, req.body);
-  res.send(user);
+  const restaurant = await restaurantService.updateRestaurantById(req.params.restaurantId, req.body);
+  res.send(restaurant);
 });
 
 const deleteRestaurant = catchAsync(async (req, res) => {
-  await userService.deleteUserById(req.params.userId);
+  await restaurantService.deleteRestaurantById(req.params.restaurantId);
   res.status(httpStatus.NO_CONTENT).send();
 });
 

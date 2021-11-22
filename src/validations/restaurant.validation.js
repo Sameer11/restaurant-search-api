@@ -10,12 +10,12 @@ const createRestaurant = {
     state: Joi.string().required(),
     rating: Joi.string().required(),
     reviewCount: Joi.string().required(),
-    location: Joi.array().items(
-        Joi.object({
-            lat: Joi.string().required(),
-            long: Joi.string().required(),
-        })
-    ),
+    location: Joi.array(),
+    menu: Joi.array().items(Joi.object().keys({
+      itemName: Joi.string(),
+      itemValue: Joi.string(),
+      itemCategory: Joi.string(),
+    }))
   }),
 };
 
