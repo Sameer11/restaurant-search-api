@@ -34,10 +34,16 @@ const deleteRestaurant = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
+const updateRestaurantMenu = catchAsync(async (req, res) => {
+  const restaurant = await restaurantService.updateRestaurantById(req.params.restaurantId, req.body);
+  res.send(restaurant);
+});
+
 module.exports = {
   createRestaurant,
   getRestaurants,
   getRestaurant,
   updateRestaurant,
   deleteRestaurant,
+  updateRestaurantMenu,
 };

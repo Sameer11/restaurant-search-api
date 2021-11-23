@@ -41,7 +41,10 @@ const restaurantSchema = mongoose.Schema(
     location: {
       type: { type: String },
       coordinates: [Number],
-  }
+    },
+    menu: {
+      type: Array,
+  },
   },
   {
     timestamps: true,

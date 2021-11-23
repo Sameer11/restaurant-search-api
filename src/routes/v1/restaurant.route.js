@@ -20,7 +20,7 @@ router
     );
 
 router
-  .route('/:userId')
+  .route('/:restaurantId')
   .get(
       //auth('getUsers'), 
       validate(restaurantValidation.getRestaurant),
@@ -29,6 +29,11 @@ router
   .patch(
       //auth('manageUsers'), 
       validate(restaurantValidation.updateRestaurant),
+      restaurantController.updateRestaurant
+    )
+  .patch(
+      //auth('manageUsers'), 
+      validate(restaurantValidation.updateRestaurantMenu),
       restaurantController.updateRestaurant
     )
   .delete(
